@@ -17,4 +17,4 @@ Slim PHP client for interaction with the OpenBazaar API via cURL
     // follow BazaarBay
     $result = $OpenBazaar->follow('7a94af9cf4d784a974a17e18089ce62f529ce41f');
     
-```
+``` 
