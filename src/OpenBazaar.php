@@ -16,8 +16,9 @@
 class OpenBazaar {
 
     private $_curl;
-    private $_error;
     private $_url;
+
+    private $_error;
 
 
     /*
@@ -36,7 +37,8 @@ class OpenBazaar {
                                 $protocol    = 'http',
                                 $host        = 'localhost',
                                 $port        = 18469,
-                                $certificate = false) {
+                                $certificate = null
+    ) {
 
         // Create session
         $this->_curl = curl_init();
@@ -525,9 +527,24 @@ class OpenBazaar {
 
             return false;
 
-        } else {
-
-            return json_decode($response, true);
         }
+
+        if (false === $response = json_decode($response, true)) {
+
+            $this->_error = 'cannot decode raw data';
+
+            return false;
+
+        }
+
+        if (false === (bool) $response['success']) {
+
+            $this->_error = $response['reason'];
+
+            return false;
+
+        }
+
+        return $response;
     }
 }
