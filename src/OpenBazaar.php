@@ -34,10 +34,10 @@ class OpenBazaar {
      */
     public function __construct($username,
                                 $password,
-                                $protocol    = 'http',
-                                $host        = 'localhost',
-                                $port        = 18469,
-                                $certificate = null
+                                $protocol    = 'http',      // todo
+                                $host        = 'localhost', // todo
+                                $port        = 18469,       // todo
+                                $certificate = null         // todo
     ) {
 
         // Create session
