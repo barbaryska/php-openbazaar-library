@@ -22,4 +22,5 @@ Slim PHP client for interaction with the OpenBazaar API via cURL
 ### Documentation
 
 [OpenBazaar REST API Documentation GET calls](https://gist.github.com/drwasho/742505589f62f6aa98b4)
+
 [OpenBazaar REST API Documentation POST calls](https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f)
