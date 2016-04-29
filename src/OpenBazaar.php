@@ -486,30 +486,30 @@ class OpenBazaar {
      * as well as publish the keywords in the distributed hash table.
      *
      * @param string $expiration_date The date the contract should expire in string formatted UTC datetime, empty string if the contract never expires
-     * @param string $metadata_category.Select from: physical good, digital good and service.
-     * @param string $title.Title of the product for sale.
-     * @param string $description.Description of the item, content or service.
-     * @param string $currency_code.The currency the product is priced in may either be “btc” or a currency from this list
-     * @param float $price.The price per unit in the same currency as currency_code.
-     * @param string $process_time.The time it will take to prepare the item for shipping.
-     * @param bool $nsfw.Is the item not suitable for work (i.e. 18+).
-     * @param string $shipping_origin.Required and only applicable if the metadata_category is a physical good.Where the item ships from.Must be a formatted string from this list.
-     * @param string $shipping_regions.Required and only applicable if the metadata_category is a physical good.A list of countries/regions where the product will ship to.Each item in the list must be formatted from this list.
-     * @param string $est_delivery_domestic.Estimated delivery time for domestic shipments.
-     * @param string $est_delivery_international.Estimated delivery time for international shipments.
-     * @param string $terms_conditions.Any terms or conditions the user wishes to include.
-     * @param string $returns.Return policy.
-     * @param string $shipping_currency_code.The currency code used to price shipping. may either be “btc” or a currency from this list.
-     * @param string $shipping_domestic.The price of domestic shipping in the selected currency code.
-     * @param string $shipping_international.The price of nternational shipping in the selected currency code.
-     * @param string $keywords.A list of string search terms for the listing.Must be fewer than 10.
-     * @param string $category.A user-generated category for this product.Will show in store’s category list.
-     * @param string $condition.The condition of the product.
-     * @param string $sku.Stock keeping unit (sku) for the listing.
-     * @param string $images.40 character hex string.A list of SHA256 image hashes.The images should be uploaded using the upload_image api call.
-     * @param bool $free_shipping.Can be "true" or "false".
-     * @param string $moderators.GUID: 40 character hex string.A list of moderator GUIDs that the vendor wishes to use.Note: the moderator must have been previously returned by the get_moderators websocket call.Given the UI workflow, this call should always be made before the contract is set.
-     * @param string $options.A list of options for the product.For example, given “color” in the options list, choose from "red", "green", "purple" etc.
+     * @param string $metadata_category Select from: physical good, digital good and service.
+     * @param string $title Title of the product for sale.
+     * @param string $description Description of the item, content or service.
+     * @param string $currency_code The currency the product is priced in may either be “btc” or a currency from this list
+     * @param float  $price The price per unit in the same currency as currency_code.
+     * @param string $process_time The time it will take to prepare the item for shipping.
+     * @param bool   $nsfw Is the item not suitable for work (i.e. 18+).
+     * @param string $shipping_origin Required and only applicable if the metadata_category is a physical good.Where the item ships from.Must be a formatted string from this list.
+     * @param string $shipping_regions Required and only applicable if the metadata_category is a physical good.A list of countries/regions where the product will ship to.Each item in the list must be formatted from this list.
+     * @param string $est_delivery_domestic Estimated delivery time for domestic shipments.
+     * @param string $est_delivery_international Estimated delivery time for international shipments.
+     * @param string $terms_conditions Any terms or conditions the user wishes to include.
+     * @param string $returns Return policy.
+     * @param string $shipping_currency_code The currency code used to price shipping. may either be “btc” or a currency from this list.
+     * @param string $shipping_domestic The price of domestic shipping in the selected currency code.
+     * @param string $shipping_international The price of nternational shipping in the selected currency code.
+     * @param string $keywords A list of string search terms for the listing.Must be fewer than 10.
+     * @param string $category A user-generated category for this product.Will show in store’s category list.
+     * @param string $condition The condition of the product.
+     * @param string $sku Stock keeping unit (sku) for the listing.
+     * @param string $images 40 character hex string.A list of SHA256 image hashes.The images should be uploaded using the upload_image api call.
+     * @param bool $free_shipping Can be "true" or "false".
+     * @param string $moderators GUID: 40 character hex string.A list of moderator GUIDs that the vendor wishes to use.Note: the moderator must have been previously returned by the get_moderators websocket call.Given the UI workflow, this call should always be made before the contract is set.
+     * @param string $options A list of options for the product.For example, given “color” in the options list, choose from "red", "green", "purple" etc.
      */
 
     public function contracts($expiration_date,
@@ -578,23 +578,23 @@ class OpenBazaar {
     /*
      * Add data related to the node's profile into the database, which will be visible to other nodes.
      *
-     * @param string $name.Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
-     * @param string $location.Country code.Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
-     * @param string $handle.String starting with @.The Blockchain ID handle starting with “@”.Eventually this will be required to resolve to the guid.
-     * @param string $about.'About' text for the store.
-     * @param string $short_description.Text to show in the homepage store list (string).
-     * @param bool   $nsfw.Is this user profile/store nsfw? Will default to false if the field is omitted. (“true” or “false”).
-     * @param bool   $moderator.Is this user a moderator? must be set to true if so. defaults to false if omitted. (“true” or “false”).
-     * @param bool   $vendor.Is this user a vendor? must be set to true if so. defaults to false if omitted. (“true” or “false”).
-     * @param string $website.A website for this user (string).
-     * @param string $email.An email address for this user (string).
-     * @param int    $primary_color.Hex color formatted in base 10. For example, 00FF00 should be sent as “65280” (string of base 10 formatted hex color).
-     * @param int    $secondary_color.Same as primary color.
-     * @param int    $text_color.Same as primary color.
-     * @param int    $background_color.Same as primary color.
-     * @param string $avatar.The hash of the avatar image. must have been previously uploaded using the upload_image api call (40 character hex string).
-     * @param string $header.The hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string).
-     * @param string $pgp_key.A pgp public key to include in the profile. if included the signature field must also be included. (string pgp public key block).
+     * @param string $name Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
+     * @param string $location Country code.Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
+     * @param string $handle String starting with @.The Blockchain ID handle starting with “@”.Eventually this will be required to resolve to the guid.
+     * @param string $about 'About' text for the store.
+     * @param string $short_description Text to show in the homepage store list (string).
+     * @param bool   $nsfw Is this user profile/store nsfw? Will default to false if the field is omitted. (“true” or “false”).
+     * @param bool   $moderator Is this user a moderator? must be set to true if so. defaults to false if omitted. (“true” or “false”).
+     * @param bool   $vendor Is this user a vendor? must be set to true if so. defaults to false if omitted. (“true” or “false”).
+     * @param string $website A website for this user (string).
+     * @param string $email An email address for this user (string).
+     * @param int    $primary_color Hex color formatted in base 10. For example, 00FF00 should be sent as “65280” (string of base 10 formatted hex color).
+     * @param int    $secondary_color Same as primary color.
+     * @param int    $text_color Same as primary color.
+     * @param int    $background_color Same as primary color.
+     * @param string $avatar The hash of the avatar image. must have been previously uploaded using the upload_image api call (40 character hex string).
+     * @param string $header The hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string).
+     * @param string $pgp_key A pgp public key to include in the profile. if included the signature field must also be included. (string pgp public key block).
      *
      */
 
@@ -649,15 +649,15 @@ class OpenBazaar {
      * Purchases a contract by sending the purchase into the Vendor. The Buyer waits for a response to indicate
      * whether the purchase is successful or not. If successful, the Buyer needs to fund the direct or multisig address.
      *
-     * @param string $id.40 character hex string.The contract id to be purchased.Note: the contract must be in cache, meaning it must have been called specifically at least once.
-     * @param string $quantity.Number of items to be purchased.
-     * @param string $ship_to.Name of the person that the item will be shipped to.
-     * @param string $address.Street address for delivery of the item.
-     * @param string $city.Name of the city corresponding to the address.
-     * @param string $state.Name of the state corresponding to the address.
-     * @param string $postal_code.Postal code corresponding to the address.
-     * @param string $moderator.40 character hex string.The Moderator, listed in the original contract, chosen by the buyer.This is omitted if there is a direct payment.
-     * @param string $options.E.g. "color".
+     * @param string $id 40 character hex string.The contract id to be purchased.Note: the contract must be in cache, meaning it must have been called specifically at least once.
+     * @param string $quantity Number of items to be purchased.
+     * @param string $ship_to Name of the person that the item will be shipped to.
+     * @param string $address Street address for delivery of the item.
+     * @param string $city Name of the city corresponding to the address.
+     * @param string $state Name of the state corresponding to the address.
+     * @param string $postal_code Postal code corresponding to the address.
+     * @param string $moderator 40 character hex string.The Moderator, listed in the original contract, chosen by the buyer.This is omitted if there is a direct payment.
+     * @param string $options E.g. "color".
      *
      */
 
