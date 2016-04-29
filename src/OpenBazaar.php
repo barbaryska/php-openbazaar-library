@@ -732,12 +732,103 @@ class OpenBazaar {
 
     }
 
+    /**
+     * Sends a message with a partially signed transaction releasing funds from escrow to the
+     * Vendor as well as review data.
+     *
+     * @param string $id 40 character hex string.
+     * @param string $feedback String: 1-5.Overall rating of the transaction.
+     * @param string $quality String: 1-5.Rating of the quality of the item, content, or service.
+     * @param string $description String: 1-5.Rating of the listing description of the item, content, or service.
+     * @param string $delivery_time String: 1-5.Rating of the time taken to deliver the item.
+     * @param string $customer_service String: 1-5.Rating of the customer service displayed by the Vendor.
+     * @param string $review String <= 80 characters.Free text to review the transaction.
+
+     * @return bool|mixed
+     */
+    public function completeOrder($id,
+                                  $feedback,
+                                  $quality,
+                                  $description,
+                                  $delivery_time,
+                                  $customer_service,
+                                  $review
+    ) {
+
+        return $this->_query(
+            'POST',
+            'complete_order',
+            array(
+                'id'               => $id,
+                'feedback'         => $feedback,
+                'quality'          => $quality,
+                'description'      => $description,
+                'delivery_time'    => $delivery_time,
+                'customer_service' => $customer_service,
+                'review'           => $review,
+            )
+        );
+
+    }
+
+    /**
+     *Changes the settings of the node and pushes them to the database.
+     *
+     * @param string $refund_address If a transaction is refunded, bitcoins will be sent to this address.
+     * @param string $currency_code Sets the price of listings displayed in the client.
+     * @param string $country Sets the country of origin.
+     * @param string $language Language used in the client.
+     * @param string $time_zone Timezone of the user.
+     * @param bool   $notifications Whether notifications are shown in the client.
+     * @param string $shipping_addresses Will be used to determine if an item can be shipped to the user's location.
+     * @param string $blocked 40 character hex string.Nodes that the user will not retrieve and display data from.
+     * @param string $libbitcoin_server If blank, it will default to the hardcoded libbitcoin servers in the server repository.
+     * @param bool    $ssl Sets whether SSL is used to communicate with the server.
+     * @param string $terms_conditions Terms and conditions to be added by default to all listings, unless overwritten in the listing process.
+     * @param string $refund_policy Refund policy to be added by default to all listings, unless overwritten in the listing process.
+     * @return bool|mixed
+     */
+
+    public function settings($refund_address,
+                             $currency_code,
+                             $country,
+                             $language,
+                             $time_zone,
+                             $notifications,
+                             $shipping_addresses,
+                             $blocked,
+                             $libbitcoin_server,
+                             $ssl,
+                             $terms_conditions,
+                             $refund_policy
+) {
+
+        return $this->_query(
+            'POST',
+            'settings',
+            array(
+                'refund_address'     => $refund_address,
+                'currency_code'      => $currency_code,
+                'country'            => $country,
+                'language'           => $language,
+                'time_zone'          => $time_zone,
+                'notifications'      => $notifications,
+                'shipping_addresses' => $shipping_addresses,
+                'blocked'            => $blocked,
+                'libbitcoin_server'  => $libbitcoin_server,
+                'ssl'                => $ssl,
+                'terms_conditions'   => $terms_conditions,
+                'refund_policy'      => $refund_policy,
+            )
+        );
+
+    }
     // todo
 
 
 
-    public function completeOrder() {}
-    public function settings() {}
+
+
 
 
     private function _query($method, $uri, array $args = array()) {
