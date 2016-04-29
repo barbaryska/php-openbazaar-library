@@ -573,8 +573,82 @@ class OpenBazaar {
 
     }
 
+
+
+    /*
+     * Add data related to the node's profile into the database, which will be visible to other nodes.
+     *
+     * @param string $name.Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
+     * @param string $location.Country code.Required.Must be set on the firt call to create the profile, but can be omitted on subsequent calls to update other fields in the profile.
+     * @param string $handle.String starting with @.The Blockchain ID handle starting with “@”.Eventually this will be required to resolve to the guid.
+     * @param string $about.'About' text for the store.
+     * @param string $short_description.Text to show in the homepage store list (string).
+     * @param bool   $nsfw.Is this user profile/store nsfw? Will default to false if the field is omitted. (“true” or “false”).
+     * @param bool   $moderator.Is this user a moderator? must be set to true if so. defaults to false if omitted. (“true” or “false”).
+     * @param bool   $vendor.Is this user a vendor? must be set to true if so. defaults to false if omitted. (“true” or “false”).
+     * @param string $website.A website for this user (string).
+     * @param string $email.An email address for this user (string).
+     * @param int    $primary_color.Hex color formatted in base 10. For example, 00FF00 should be sent as “65280” (string of base 10 formatted hex color).
+     * @param int    $secondary_color.Same as primary color.
+     * @param int    $text_color.Same as primary color.
+     * @param int    $background_color.Same as primary color.
+     * @param string $avatar.The hash of the avatar image. must have been previously uploaded using the upload_image api call (40 character hex string).
+     * @param string $header.The hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string).
+     * @param string $pgp_key.A pgp public key to include in the profile. if included the signature field must also be included. (string pgp public key block).
+     *
+     */
+
+    public function profile($name,
+                            $location,
+                            $handle,
+                            $about,
+                            $short_description,
+                            $nsfw,
+                            $vendor,
+                            $moderator,
+                            $website,
+                            $email,
+                            $primary_color,
+                            $secondary_color,
+                            $text_color,
+                            $background_color,
+                            $avatar,
+                            $header,
+                            $pgp_key
+        ) {
+
+        return $this->_query(
+            'POST',
+            'profile',
+            array(
+                'name'              => $name,
+                'location'          => $location,
+                'handle'            => $handle,
+                'about'             => $about,
+                'short_description' => $short_description,
+                'nsfw'              => $nsfw,
+                'vendor'            => $vendor,
+                'moderator'         => $moderator,
+                'website'           => $website,
+                'email'             => $email,
+                'primary_color'     => $primary_color,
+                'secondary_color'   => $secondary_color,
+                'text_color'        => $text_color,
+                'background_color'  => $background_color,
+                'avatar'            => $avatar,
+                'header'            => $header,
+                'pgp_key'           => $pgp_key,
+
+            )
+        );
+
+    }
+
+
+
+
     // todo
-    public function profile() {}
+
     public function purchaseContract() {}
     public function confirmOrder() {}
     public function completeOrder() {}
