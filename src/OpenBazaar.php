@@ -253,7 +253,7 @@ class OpenBazaar {
      * API call to cleanly disconnect from connected nodes and shutsdown the OpenBazaar server component.
      *
      */
-    public function getShutdown() {
+    public function shutdown() {
 
         return $this->_query(
             'GET',
