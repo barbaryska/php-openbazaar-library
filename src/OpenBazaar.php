@@ -480,9 +480,101 @@ class OpenBazaar {
 
     }
 
+
+    /*
+     * Creates a listing contract, which is saved to the database and local file system,
+     * as well as publish the keywords in the distributed hash table.
+     *
+     * @param string $expiration_date The date the contract should expire in string formatted UTC datetime, empty string if the contract never expires
+     * @param string $metadata_category.Select from: physical good, digital good and service.
+     * @param string $title.Title of the product for sale.
+     * @param string $description.Description of the item, content or service.
+     * @param string $currency_code.The currency the product is priced in may either be “btc” or a currency from this list
+     * @param float $price.The price per unit in the same currency as currency_code.
+     * @param string $process_time.The time it will take to prepare the item for shipping.
+     * @param bool $nsfw.Is the item not suitable for work (i.e. 18+).
+     * @param string $shipping_origin.Required and only applicable if the metadata_category is a physical good.Where the item ships from.Must be a formatted string from this list.
+     * @param string $shipping_regions.Required and only applicable if the metadata_category is a physical good.A list of countries/regions where the product will ship to.Each item in the list must be formatted from this list.
+     * @param string $est_delivery_domestic.Estimated delivery time for domestic shipments.
+     * @param string $est_delivery_international.Estimated delivery time for international shipments.
+     * @param string $terms_conditions.Any terms or conditions the user wishes to include.
+     * @param string $returns.Return policy.
+     * @param string $shipping_currency_code.The currency code used to price shipping. may either be “btc” or a currency from this list.
+     * @param string $shipping_domestic.The price of domestic shipping in the selected currency code.
+     * @param string $shipping_international.The price of nternational shipping in the selected currency code.
+     * @param string $keywords.A list of string search terms for the listing.Must be fewer than 10.
+     * @param string $category.A user-generated category for this product.Will show in store’s category list.
+     * @param string $condition.The condition of the product.
+     * @param string $sku.Stock keeping unit (sku) for the listing.
+     * @param string $images.40 character hex string.A list of SHA256 image hashes.The images should be uploaded using the upload_image api call.
+     * @param bool $free_shipping.Can be "true" or "false".
+     * @param string $moderators.GUID: 40 character hex string.A list of moderator GUIDs that the vendor wishes to use.Note: the moderator must have been previously returned by the get_moderators websocket call.Given the UI workflow, this call should always be made before the contract is set.
+     * @param string $options.A list of options for the product.For example, given “color” in the options list, choose from "red", "green", "purple" etc.
+     */
+
+    public function contracts($expiration_date,
+                              $metadata_category,
+                              $title,
+                              $description,
+                              $currency_code,
+                              $price,
+                              $process_time,
+                              $nsfw,
+                              $est_delivery_domestic,
+                              $est_delivery_international,
+                              $terms_conditions,
+                              $returns,
+                              $shipping_currency_code,
+                              $category,
+                              $condition,
+                              $shipping_origin,
+                              $shipping_regions,
+                              $shipping_domestic,
+                              $shipping_international,
+                              $keywords,
+                              $sku,
+                              $images,
+                              $free_shipping,
+                              $moderators,
+                              $options
+        ) {
+
+        return $this->_query(
+            'POST',
+            'contracts',
+            array(
+                'expiration_date'            => $expiration_date,
+                'metadata_category'          => $metadata_category,
+                'title'                      => $title,
+                'description'                => $description,
+                'currency_code'              => $currency_code,
+                'price'                      => $price,
+                'process_time'               => $process_time,
+                'nsfw'                       => $nsfw,
+                'est_delivery_domestic'      => $est_delivery_domestic,
+                'est_delivery_international' => $est_delivery_international,
+                'terms_conditions'           => $terms_conditions,
+                'returns'                    => $returns,
+                'shipping_currency_code'     => $shipping_currency_code,
+                'category'                   => $category,
+                'condition'                  => $condition,
+                'shipping_origin'            => $shipping_origin,
+                'shipping_regions'           => $shipping_regions,
+                'shipping_domestic'          => $shipping_domestic,
+                'shipping_international'     => $shipping_international,
+                'keywords'                   => $keywords,
+                'sku'                        => $sku,
+                'images'                     => $images,
+                'free_shipping'              => $free_shipping,
+                'moderators'                 => $moderators,
+                'options'                    => $options,
+            )
+        );
+
+    }
+
     // todo
     public function profile() {}
-    public function contracts() {}
     public function purchaseContract() {}
     public function confirmOrder() {}
     public function completeOrder() {}
