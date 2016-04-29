@@ -695,10 +695,47 @@ class OpenBazaar {
     }
 
 
+    /*
+     *Sends the order confirmation and shipping information to the Buyer. If he’s offline, it will embed
+     * this data into the dht. The API call also updates the status of the order in the database.
+     *
+     * @param string $id 40 character hex string.ID of the order placed by the Buyer.This only applies to orders that have been funded.
+     * @param string $shipper For physical goods to be delivered.
+     * @param string $tracking_number For physical goods to be delivered.
+     * @param string $est_delivery Based on the feedback from the shipper, an up to date estimate of delivery.
+     * @param string $url For digital content only.
+     * @param string $password To decrypt and/or access protected digital content.
+     *
+     */
+
+    public function confirmOrder($id,
+                                 $shipper,
+                                 $tracking_number,
+                                 $est_delivery,
+                                 $url,
+                                 $password
+) {
+
+        return $this->_query(
+            'POST',
+            'confirm_order',
+            array(
+                'id'              => $id,
+                'shipper'         => $shipper,
+                'tracking_number' => $tracking_number,
+                'est_delivery'    => $est_delivery,
+                'url'             => $url,
+                'password'        => $password,
+
+            )
+        );
+
+    }
+
     // todo
 
 
-    public function confirmOrder() {}
+
     public function completeOrder() {}
     public function settings() {}
 
