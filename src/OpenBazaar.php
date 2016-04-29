@@ -645,11 +645,59 @@ class OpenBazaar {
     }
 
 
+    /*
+     * Purchases a contract by sending the purchase into the Vendor. The Buyer waits for a response to indicate
+     * whether the purchase is successful or not. If successful, the Buyer needs to fund the direct or multisig address.
+     *
+     * @param string $id.40 character hex string.The contract id to be purchased.Note: the contract must be in cache, meaning it must have been called specifically at least once.
+     * @param string $quantity.Number of items to be purchased.
+     * @param string $ship_to.Name of the person that the item will be shipped to.
+     * @param string $address.Street address for delivery of the item.
+     * @param string $city.Name of the city corresponding to the address.
+     * @param string $state.Name of the state corresponding to the address.
+     * @param string $postal_code.Postal code corresponding to the address.
+     * @param string $moderator.40 character hex string.The Moderator, listed in the original contract, chosen by the buyer.This is omitted if there is a direct payment.
+     * @param string $options.E.g. "color".
+     *
+     */
+
+
+    public function purchaseContract($id,
+                                     $quantity,
+                                     $ship_to,
+                                     $address,
+                                     $city,
+                                     $state,
+                                     $postal_code,
+                                     $moderator,
+                                     $options
+
+
+    ) {
+
+        return $this->_query(
+            'POST',
+            'purchase_contract',
+            array(
+                'id'          => $id,
+                'quantity'    => $quantity,
+                'ship_to'     => $ship_to,
+                'address'     => $address,
+                'city'        => $city,
+                'state'       => $state,
+                'postal_code' => $postal_code,
+                'moderator'   => $moderator,
+                'options'     => $options,
+
+            )
+        );
+
+    }
 
 
     // todo
 
-    public function purchaseContract() {}
+
     public function confirmOrder() {}
     public function completeOrder() {}
     public function settings() {}
